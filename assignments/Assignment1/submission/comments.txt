@@ -78,7 +78,8 @@ Comments from tbojovic
 Comments from awoosare
 ------------------
 - The way marriage records is implemented does not restrict a person from
-  marrying himself or herself
+  marrying himself or herself. However, I think this is acceptable as there
+  are documented cases of people legally marrying themselves
 - For Demerit Point Notice, would notice date in combination with description
   better for weak keys?
 - I really like the way the relationship between Tickets, Traffic Officer, and
