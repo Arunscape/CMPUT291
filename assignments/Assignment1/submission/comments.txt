@@ -2,7 +2,7 @@
 Arun's Submission
 -----------------------
 
-Hugo Comments
+Hai Yang's Comments
 --------------
 -Driver doesn't need a driver's license, as specificed in the
 description
@@ -14,8 +14,7 @@ say.
 a person can be married to themselves since a single Person can 
 participate in the Partner 1 relationship and the Partner 2 relationship
 
-
-Tamara Comments
+Tamara's Comments
 ---------------
 -The requirements also say CAN have license(s), meaning the driver
 could have 0 or more licenses. They don't need one, and they can
@@ -29,4 +28,48 @@ entities with different purposes
 -Ternary relationship between mother, father and birth implies that
 you need a father, which the requirements say you don't.S
 -Entity for mother and father is redundant because there are no
-additional attributes added
+additional attributes added.
+
+-----------------------
+Hai Yang's Submission
+-----------------------
+
+Arun's Comments
+--------------
+-Demerit-point-notice should have to participate in the has_notice
+relationship. Notice needs a driver.
+-Demerit-point-notice should be a weak entity because it cannot
+exist without a driver.
+-To me it makes sense that a driver can only have license, because
+that's how it is in Alberta law.
+-For the ticket and registered vehicle relationship, there should
+be an arrow between the relationship and registered vehicle. This
+is because a ticket only belonds to one vehicles, and many tickets
+can still be given to a vehicle.
+-I would remove the ternary relationship between Ticket,
+Registered_vehicle, and TrafficOfficer.
+-I don't agree with father being an attribute. You don't know the
+details that a person should have, you would just know the name.
+-Can relationships have a key attribute? Just a question.
+-There should be a participation constraint on birth and mother,
+because every mother needs to have given birth to become a mother
+-Partner and marriage should have a participation constraint.
+If you are a partner, you are married
+-Person can't marry again. Doesn't allow for multiple marriages
+
+Tamara's Comments
+---------------
+-Based on the requirements, a driver should be able to have multiple
+licenses, regardless of what is true in Alberta law.
+-Driver's license should only have one driver, not multiple drivers.
+-For the traffic officer, ticket, and registered vehicle ternary 
+relationships, a traffic officer cannot give a different ticket
+to the same vehicle.
+-Registered vehicle is NOT a car. It inherits the attributes of the
+vehicles like year and color, which is not appropriate for a 
+record. The vehicle has these attributes but not the registration
+itself
+-Mother is kind of redundant because there are no additional attributes
+that distinguish it from a person
+-Why are person and partner different? How do you define who's the
+partner and who's the person? Seems arbitrary.
