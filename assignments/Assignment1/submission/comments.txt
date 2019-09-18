@@ -50,20 +50,20 @@ Comments of awoosare
 - Can relationships have a key attribute? Just a question.
 - There should be a participation constraint on birth and mother, because every
   mother needs to have given birth to become a mother.
-- Partner and marriage should have a participation constraint. If you are a
-  partner, you are married, but if a Person is in the marriage relationship,
-  this model prevents the Person from having another marriage later.
-- Person can't marry again. Doesn't allow for multiple marriages.
+- Partner and marriage should have a different participation constraint. If you
+  are a partner, you are married, but if a Person is in the marriage
+  relationship, this model prevents the Person from having another marriage
+  later.
 
 Comments from tbojovic
 ----------------------
 - Based on the requirements, a driver should be able to have multiple licenses,
   regardless of what is true in Alberta law.
 - Driver's license should only have one driver, not multiple drivers.
-- For the traffic officer, ticket, and registered vehicle ternary
+- For the Traffic_officer, Ticket, and Registered_vehicle ternary
   relationships, a traffic officer cannot give a different ticket to the same
   vehicle.
-- Registered vehicle is NOT a car. It inherits the attributes of the vehicles
+- Registered_vehicle is NOT a car. It inherits the attributes of Vehicle
   like year and color, which is not appropriate for a record. The vehicle has
   these attributes but not the registration itself.
 - Mother is kind of redundant because there are no additional attributes that
@@ -79,14 +79,15 @@ Comments from awoosare
 ------------------
 - The way marriage records is implemented does not restrict a person from
   marrying himself or herself
-- For demerit point notices, would notice date in combination with description
+- For Demerit Point Notice, would notice date in combination with description
   better for weak keys?
-- I really like the way the relationship between tickets, traffic officer, and
-  registered vehicle is done.
+- I really like the way the relationship between Tickets, Traffic Officer, and
+  Registered Vehicle is done.
 
 Comments from haiyang3
 ----------------------
-- There should not be a records parent entity, as birth and mariage can be
+- Record should not be the parent entity of Birth and Mariage, as they can be
   managed by different departments.
-- Notice date of demerit point notices is set as weak key, how would we record
+- Notice date of Demerit Point Notice is set as weak key, how would we record
   the case when a driver got multiple notices in a day.
+- Shouldn't entity names be singular?
