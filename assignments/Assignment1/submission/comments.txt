@@ -7,23 +7,24 @@ Comments of haiyang3
 - Driver doesn't need a driver's license, as specificed in the description.
 - Don't agree with the ternary relationship between Traffic Officer, Ticket,
   and Vehicle Registration. This implies that you need a traffic officer to
-  issue the ticket, which the description does not say.
+  issue the ticket, the description says a ticket can be issues without an
+  officer.
 - The two relationships between Person and Marriage imply that a person can be
   married to themselves since a single Person can participate in the Partner 1
-  relationship and the Partner 2 relationship.
+  relationship as well as the Partner 2 relationship.
 
 Comments of tbojovic
 --------------------
-- The requirements also say CAN have license(s), meaning the driver could have
-  0 or more licenses. They don't need one, and they can have multiple.
+- The requirement says CAN have license(s), meaning the driver could have 0 or
+  more licenses. They don't need one, and they can have multiple.
 - License's classes don't need to be assigned to a license. Nothing in the
   description indicates that all classes need to be in use.
 - Maybe demerit noitce should have a weak key of date?
 - Not sure if vehicle registration should share the same parent as birth record
   and marriage record. They seem like separate legal entities with different
   purposes
-- Ternary relationship between mother, father and birth implies that you need a
-  father, which the requirements say you don't.
+- Ternary relationship between mother, father, and birth implies that you need
+  a father, which the requirements say you don't.
 - Entity for mother and father is redundant because there are no additional
   attributes added.
 
@@ -33,25 +34,25 @@ Comments of tbojovic
 
 Comments of awoosare
 --------------------
-- Demerit-point-notice should have to participate in the has_notice
+- Demerit_point_notice should have to participate in the has_notice
   relationship. Notice needs a driver.
-- Demerit-point-notice should be a weak entity because it cannot exist without
+- Demerit_point_notice should be a weak entity because it cannot exist without
   a driver.
-- To me it makes sense that a driver can only have license, because that's how
-  it is in Alberta law.
+- To me it makes sense that a driver can only have one license and not many,
+  because that's how Alberta traffic law works.
 - For the ticket and registered vehicle relationship, there should be an arrow
   between the relationship and registered vehicle. This is because a ticket
-  only belonds to one vehicles, and many tickets can still be given to a
-  vehicle.
+  can only belong to one vehicle, but a vehicle can receive many tickets.
 - I would remove the ternary relationship between Ticket, Registered_vehicle,
-  and TrafficOfficer.
+  and Traffic_officer.
 - I don't agree with father being an attribute. You don't know the details that
-  a person should have, you would just know the name.
+  the person would have, you would just know the name.
 - Can relationships have a key attribute? Just a question.
 - There should be a participation constraint on birth and mother, because every
   mother needs to have given birth to become a mother.
 - Partner and marriage should have a participation constraint. If you are a
-  partner, you are married.
+  partner, you are married, but if a Person is in the marriage relationship,
+  this model prevents the Person from having another marriage later.
 - Person can't marry again. Doesn't allow for multiple marriages.
 
 Comments from tbojovic
@@ -64,7 +65,7 @@ Comments from tbojovic
   vehicle.
 - Registered vehicle is NOT a car. It inherits the attributes of the vehicles
   like year and color, which is not appropriate for a record. The vehicle has
- these attributes but not the registration itself.
+  these attributes but not the registration itself.
 - Mother is kind of redundant because there are no additional attributes that
   distinguish it from a person.
 - Why are person and partner different? How do you define who's the partner and
