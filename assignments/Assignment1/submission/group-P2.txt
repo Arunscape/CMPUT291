@@ -1,0 +1,20 @@
+CREATE TABLE Bookings(
+	seats   INTEGER,
+	bno     CHAR(16), 
+	cost    REAL,
+	isFor   CHAR(16),
+	dropOff CHAR(16),
+	pickUp  CHAR(16),
+	reserve CHAR(320),
+	PRIMARY KEY bno,
+	FOREIGN KEY (isFor) REFERENCES Rides,
+	FOREIGN KEY (dropOff) REFERENCES Locations,
+	FOREIGN KEY (pickup) REFERENCES Locations,
+	FOREIGN KEY (reserve) REFERENCES Members
+);
+
+CREATE TABLE Members(
+	email CHAR(320),
+	name  CHAR(64),
+	phone CHAR(16)
+);
