@@ -4,10 +4,10 @@
 
 Comments of haiyang3
 --------------------
-- Driver doesn't need a driver's license, as specificed in the description.
+- Driver doesn't need a driver's license, as specified in the description.
 - Don't agree with the ternary relationship between Traffic Officer, Ticket,
   and Vehicle Registration. This implies that you need a traffic officer to
-  issue the ticket, the description says a ticket can be issues without an
+  issue the ticket, the description says a ticket can be issued without an
   officer.
 - The two relationships between Person and Marriage imply that a person can be
   married to themselves since a single Person can participate in the Partner 1
@@ -19,7 +19,7 @@ Comments of tbojovic
   more licenses. They don't need one, and they can have multiple.
 - License's classes don't need to be assigned to a license. Nothing in the
   description indicates that all classes need to be in use.
-- Maybe demerit noitce should have a weak key of date?
+- Maybe demerit notice should have a weak key of date?
 - Not sure if vehicle registration should share the same parent as birth record
   and marriage record. They seem like separate legal entities with different
   purposes
