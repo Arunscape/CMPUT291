@@ -2,15 +2,15 @@ CREATE TABLE Bookings(
 	seats   INTEGER,
 	bno     CHAR(16), 
 	cost    REAL,
-	isFor   CHAR(16),
+	rideBooked   CHAR(16) NOT NULL,
 	dropOff CHAR(16),
 	pickUp  CHAR(16),
-	reserve CHAR(320),
+	reservedFor CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
-	FOREIGN KEY (isFor) REFERENCES Rides,
+	FOREIGN KEY (rideBook) REFERENCES Rides,
 	FOREIGN KEY (dropOff) REFERENCES Locations,
 	FOREIGN KEY (pickup) REFERENCES Locations,
-	FOREIGN KEY (reserve) REFERENCES Members
+	FOREIGN KEY (reservedFor) REFERENCES Members
 );
 
 CREATE TABLE Members(
@@ -25,8 +25,8 @@ CREATE TABLE Reviews(
 	rdate DATE,
 	rtext CHAR(320),
 	rscore INTEGER,
-	reviewer CHAR(320),
-	reviewee CHAR(320),
+	reviewer CHAR(320) NOT NULL,
+	reviewee CHAR(320) NOT NULL,
 	ride CHAR(16)
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
