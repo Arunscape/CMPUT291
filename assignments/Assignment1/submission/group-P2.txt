@@ -6,7 +6,7 @@ CREATE TABLE Bookings(
 	dropOff CHAR(16),
 	pickUp  CHAR(16),
 	reserve CHAR(320),
-	PRIMARY KEY bno,
+	PRIMARY KEY (bno),
 	FOREIGN KEY (isFor) REFERENCES Rides,
 	FOREIGN KEY (dropOff) REFERENCES Locations,
 	FOREIGN KEY (pickup) REFERENCES Locations,
@@ -16,5 +16,20 @@ CREATE TABLE Bookings(
 CREATE TABLE Members(
 	email CHAR(320),
 	name  CHAR(64),
-	phone CHAR(16)
+	phone CHAR(16),
+	PRIMARY KEY (email)
+);
+
+CREATE TABLE Reviews(
+	rid CHAR(16)
+	rdate DATE,
+	rtext CHAR(320),
+	rscore INTEGER,
+	reviewer CHAR(320),
+	reviewee CHAR(320),
+	ride CHAR(16)
+	PRIMARY KEY (rid),
+	FOREIGN KEY (reviewer) REFERENCES Members,
+	FOREIGN KEY (reviewee) REFERENCES Members,
+	FOREIGN KEY (ride) REFERENCES Rides
 );
