@@ -21,13 +21,13 @@ CREATE TABLE Members(
 );
 
 CREATE TABLE Reviews(
-	rid      CHAR(16)
+	rid      CHAR(16),
 	rdate    DATE,
 	rtext    CHAR(320),
 	rscore   INTEGER,
 	reviewer CHAR(320) NOT NULL,
 	reviewee CHAR(320) NOT NULL,
-	assoc    CHAR(16)
+	assoc    CHAR(16),
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
 	FOREIGN KEY (reviewee) REFERENCES Members,
@@ -75,5 +75,3 @@ CREATE TABLE Locations (
 CREATE TABLE Enroute (
 	what
 );
-
-
