@@ -7,9 +7,9 @@ CREATE TABLE Bookings(
 	pickUp      CHAR(16),
 	reservedFor CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
-	FOREIGN KEY (rideBook) REFERENCES Rides,
-	FOREIGN KEY (dropOff) REFERENCES Locations,
-	FOREIGN KEY (pickup) REFERENCES Locations,
+	FOREIGN KEY (rideBook)    REFERENCES Rides,
+	FOREIGN KEY (dropOff)     REFERENCES Locations,
+	FOREIGN KEY (pickup)      REFERENCES Locations,
 	FOREIGN KEY (reservedFor) REFERENCES Members
 );
 
@@ -27,11 +27,11 @@ CREATE TABLE Reviews(
 	rscore   INTEGER,
 	reviewer CHAR(320) NOT NULL,
 	reviewee CHAR(320) NOT NULL,
-	ride     CHAR(16)
+	assoc    CHAR(16)
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
 	FOREIGN KEY (reviewee) REFERENCES Members,
-	FOREIGN KEY (ride) REFERENCES Rides // why are these foreign keys?
+	FOREIGN KEY (assoc)    REFERENCES Rides
 );
 
 CREATE TABLE Rides(
@@ -40,16 +40,20 @@ CREATE TABLE Rides(
 	rdate   DATE,
 	seats   INTEGER,
 	lugDesc CHAR(1024),
-	src   REFERENCES Locations,
-	dst   REFERENCES Locations,
-	offer REFERENCES Drivers,
-	assoc REFERENCES Cars
-	PRIMARY KEY (rno)
+	src     CHAR(32),
+	dst     CHAR(32),
+	offer   CHAR(320),
+	assoc   CHAR(16),
+	PRIMARY KEY (rno),
+	FOREIGN KEY (src)   REFERENCES Locations,
+	FOREIGN KEY (dst)   REFERENCES Locations,
+	FOREIGN KEY (offer) REFERENCES Drivers,
+	FOREIGN KEY (assoc) REFERENCES Cars
 );
 
-CREATE TABLE Driver // wait it ISA member what do we do here?
+CREATE TABLE Drivers // wait it ISA member what do we do here?
 
-CREATE TABLE Cars(
+CREATE TABLE Cars (
 	cno   CHAR(16)
 	make  CHAR(16),
 	model CHAR(32),
@@ -60,7 +64,7 @@ CREATE TABLE Cars(
 	PRIMARY KEY (cno)
 ):
 
-CREATE TABLE Locations(
+CREATE TABLE Locations (
 	lcode CHAR(32),
 	city  CHAR(64),
 	prov CHAR(64),
@@ -68,7 +72,7 @@ CREATE TABLE Locations(
 	PRIMARY KEY (lcode)
 );
 
-CREATE TABLE Enroute(
+CREATE TABLE Enroute (
 	what
 );
 
