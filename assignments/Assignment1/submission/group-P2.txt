@@ -1,10 +1,10 @@
 CREATE TABLE Bookings(
-	seats   INTEGER,
-	bno     CHAR(16), 
-	cost    REAL,
-	rideBooked   CHAR(16) NOT NULL,
-	dropOff CHAR(16),
-	pickUp  CHAR(16),
+	seats       INTEGER,
+	bno         CHAR(16), 
+	cost        REAL,
+	rideBooked  CHAR(16) NOT NULL,
+	dropOff     CHAR(16),
+	pickUp      CHAR(16),
 	reservedFor CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
 	FOREIGN KEY (rideBook) REFERENCES Rides,
@@ -21,15 +21,55 @@ CREATE TABLE Members(
 );
 
 CREATE TABLE Reviews(
-	rid CHAR(16)
-	rdate DATE,
-	rtext CHAR(320),
-	rscore INTEGER,
+	rid      CHAR(16)
+	rdate    DATE,
+	rtext    CHAR(320),
+	rscore   INTEGER,
 	reviewer CHAR(320) NOT NULL,
 	reviewee CHAR(320) NOT NULL,
-	ride CHAR(16)
+	ride     CHAR(16)
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
 	FOREIGN KEY (reviewee) REFERENCES Members,
-	FOREIGN KEY (ride) REFERENCES Rides
+	FOREIGN KEY (ride) REFERENCES Rides // why are these foreign keys?
 );
+
+CREATE TABLE Rides(
+	rno     CHAR(16),
+	price   REAL,
+	rdate   DATE,
+	seats   INTEGER,
+	lugDesc CHAR(1024),
+	src   REFERENCES Locations,
+	dst   REFERENCES Locations,
+	offer REFERENCES Drivers,
+	assoc REFERENCES Cars
+	PRIMARY KEY (rno)
+);
+
+CREATE TABLE Driver // wait it ISA member what do we do here?
+
+CREATE TABLE Cars(
+	cno   CHAR(16)
+	make  CHAR(16),
+	model CHAR(32),
+	year  INTEGER,
+	seats INTEGER,
+	gdate DATE
+	register REFERENCES Driver,
+	PRIMARY KEY (cno)
+):
+
+CREATE TABLE Locations(
+	lcode CHAR(32),
+	city  CHAR(64),
+	prov CHAR(64),
+	address CHAR(128),
+	PRIMARY KEY (lcode)
+);
+
+CREATE TABLE Enroute(
+	what
+);
+
+
