@@ -1,16 +1,16 @@
 CREATE TABLE Bookings(
-	seats       INTEGER,
-	bno         CHAR(16), 
-	cost        REAL,
-	rideBooked  CHAR(16) NOT NULL,
-	dropOff     CHAR(16),
-	pickUp      CHAR(16),
-	reservedFor CHAR(320) NOT NULL,
+	seats   INTEGER,
+	bno     CHAR(16), 
+	cost    REAL,
+	isFor   CHAR(16)  NOT NULL,
+	dropOff CHAR(16),
+	pickup  CHAR(16),
+	reserve CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
-	FOREIGN KEY (rideBook)    REFERENCES Rides,
-	FOREIGN KEY (dropOff)     REFERENCES Locations,
-	FOREIGN KEY (pickup)      REFERENCES Locations,
-	FOREIGN KEY (reservedFor) REFERENCES Members
+	FOREIGN KEY (isFor)   REFERENCES Rides,
+	FOREIGN KEY (dropOff) REFERENCES Locations,
+	FOREIGN KEY (pickup)  REFERENCES Locations,
+	FOREIGN KEY (reserve) REFERENCES Members
 );
 
 CREATE TABLE Members(
@@ -40,9 +40,9 @@ CREATE TABLE Rides(
 	rdate   DATE,
 	seats   INTEGER,
 	lugDesc CHAR(1024),
-	src     CHAR(32),
-	dst     CHAR(32),
-	offer   CHAR(320),
+	src     CHAR(32)  NOT NULL,
+	dst     CHAR(32)  NOT NULL,
+	offer   CHAR(320) NOT NULL,
 	assoc   CHAR(16),
 	PRIMARY KEY (rno),
 	FOREIGN KEY (src)   REFERENCES Locations,
@@ -51,9 +51,13 @@ CREATE TABLE Rides(
 	FOREIGN KEY (assoc) REFERENCES Cars
 );
 
-CREATE TABLE Drivers // wait it ISA member what do we do here?
+CREATE TABLE Drivers(
+	email CHAR(320) NOT NULL,
+	licNo CHAR(16),
+	FOREIGN KEY (email) REFERENCES Members
+);
 
-CREATE TABLE Cars (
+CREATE TABLE Cars(
 	cno   CHAR(16)
 	make  CHAR(16),
 	model CHAR(32),
@@ -64,14 +68,19 @@ CREATE TABLE Cars (
 	PRIMARY KEY (cno)
 ):
 
-CREATE TABLE Locations (
-	lcode CHAR(32),
-	city  CHAR(64),
-	prov CHAR(64),
+CREATE TABLE Locations(
+	lcode   CHAR(32),
+	city    CHAR(64),
+	prov    CHAR(64),
 	address CHAR(128),
 	PRIMARY KEY (lcode)
 );
 
-CREATE TABLE Enroute (
-	what
+CREATE TABLE Requests(
+	amount  REAL,
+	qdate   CHAR(16),
+	pickup  CHAR(32),
+	dropoff CHAR(32),
+	FOREIGN KEY (pickup)  REFERENCES Locations,
+	FOREIGN KEY (dropoff) REFERENCES Locations
 );
