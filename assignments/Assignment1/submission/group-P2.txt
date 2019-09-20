@@ -58,14 +58,15 @@ CREATE TABLE Drivers(
 );
 
 CREATE TABLE Cars(
-	cno   CHAR(16)
-	make  CHAR(16),
-	model CHAR(32),
-	year  INTEGER,
-	seats INTEGER,
-	gdate DATE
-	register REFERENCES Driver,
-	PRIMARY KEY (cno)
+	cno      CHAR(16),
+	make     CHAR(16),
+	model    CHAR(32),
+	year     INTEGER,
+	seats    INTEGER,
+	gdate    DATE,
+	register CHAR(320),
+	PRIMARY KEY (cno),
+	FOREIGN KEY (register) REFERENCES Drivers
 ):
 
 CREATE TABLE Locations(
@@ -78,9 +79,16 @@ CREATE TABLE Locations(
 
 CREATE TABLE Requests(
 	amount  REAL,
-	qdate   CHAR(16),
+	qdate   DATE,
 	pickup  CHAR(32),
 	dropoff CHAR(32),
 	FOREIGN KEY (pickup)  REFERENCES Locations,
 	FOREIGN KEY (dropoff) REFERENCES Locations
+);
+
+CREATE TABLE Enroute(
+	rno   CHAR(16),
+	lcode CHAR(32),
+	FOREIGN KEY (rno)   REFERENCES Rides,
+	FOREIGN KEY (lcode) REFERENCES Locations
 );
