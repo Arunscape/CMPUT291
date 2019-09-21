@@ -2,8 +2,8 @@
 | Submission of awoosare |
 --------------------------
 
-Comments of haiyang3
---------------------
+Comments from haiyang3
+----------------------
 - Driver doesn't need a driver's license, as specified in the description.
 - Don't agree with the ternary relationship between Traffic Officer, Ticket,
   and Vehicle Registration. This implies that you need a traffic officer to
@@ -13,8 +13,8 @@ Comments of haiyang3
   married to themselves since a single Person can participate in the Partner 1
   relationship as well as the Partner 2 relationship.
 
-Comments of tbojovic
---------------------
+Comments from tbojovic
+----------------------
 - The requirement says CAN have license(s), meaning the driver could have 0 or
   more licenses. They don't need one, and they can have multiple.
 - License's classes don't need to be assigned to a license. Nothing in the
@@ -32,8 +32,8 @@ Comments of tbojovic
 | Submission of haiyang3 |
 --------------------------
 
-Comments of awoosare
---------------------
+Comments from awoosare
+----------------------
 - Demerit_point_notice should have to participate in the has_notice
   relationship. Notice needs a driver.
 - Demerit_point_notice should be a weak entity because it cannot exist without
@@ -76,7 +76,7 @@ Comments from tbojovic
 --------------------------
 
 Comments from awoosare
-------------------
+----------------------
 - The way marriage records is implemented does not restrict a person from
   marrying himself or herself. However, I think this is acceptable as there
   are documented cases of people legally marrying themselves
