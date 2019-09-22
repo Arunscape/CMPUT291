@@ -1,15 +1,15 @@
 CREATE TABLE Bookings(
-	seats   INTEGER,
-	bno     CHAR(16), 
-	cost    REAL,
-	isFor   CHAR(16)  NOT NULL,
-	dropOff CHAR(16),
-	pickup  CHAR(16),
+	seats       INTEGER,
+	bno         CHAR(16), 
+	cost        REAL,
+	isFor       CHAR(16)  NOT NULL,
+	dropOff     CHAR(16),
+	pickup      CHAR(16),
 	reservedFor CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
-	FOREIGN KEY (isFor)   REFERENCES Rides,
-	FOREIGN KEY (dropOff) REFERENCES Locations,
-	FOREIGN KEY (pickup)  REFERENCES Locations,
+	FOREIGN KEY (isFor)       REFERENCES Rides,
+	FOREIGN KEY (dropOff)     REFERENCES Locations,
+	FOREIGN KEY (pickup)      REFERENCES Locations,
 	FOREIGN KEY (reservedFor) REFERENCES Members
 );
 
@@ -27,11 +27,11 @@ CREATE TABLE Reviews(
 	rscore   INTEGER,
 	reviewer CHAR(320) NOT NULL,
 	reviewee CHAR(320) NOT NULL,
-	for    CHAR(16),
+	for      CHAR(16),
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
 	FOREIGN KEY (reviewee) REFERENCES Members,
-	FOREIGN KEY (for)    REFERENCES Rides
+	FOREIGN KEY (for)      REFERENCES Rides
 );
 
 CREATE TABLE Rides(
@@ -43,11 +43,11 @@ CREATE TABLE Rides(
 	src     CHAR(32)  NOT NULL,
 	dst     CHAR(32)  NOT NULL,
 	offer   CHAR(320) NOT NULL,
-	carUsed   CHAR(16),
+	carUsed CHAR(16),
 	PRIMARY KEY (rno),
-	FOREIGN KEY (src)   REFERENCES Locations,
-	FOREIGN KEY (dst)   REFERENCES Locations,
-	FOREIGN KEY (offer) REFERENCES Drivers,
+	FOREIGN KEY (src)     REFERENCES Locations,
+	FOREIGN KEY (dst)     REFERENCES Locations,
+	FOREIGN KEY (offer)   REFERENCES Drivers,
 	FOREIGN KEY (carUsed) REFERENCES Cars
 );
 
@@ -59,12 +59,12 @@ CREATE TABLE Drivers(
 );
 
 CREATE TABLE Cars(
-	cno      CHAR(16),
-	make     CHAR(16),
-	model    CHAR(32),
-	year     INTEGER,
-	seats    INTEGER,
-	gdate    DATE,
+	cno          CHAR(16),
+	make         CHAR(16),
+	model        CHAR(32),
+	year         INTEGER,
+	seats        INTEGER,
+	gdate        DATE,
 	registeredTo CHAR(320),
 	PRIMARY KEY (cno),
 	FOREIGN KEY (registeredTo) REFERENCES Drivers
@@ -83,10 +83,10 @@ CREATE TABLE Requests(
 	qdate   DATE,
 	pickup  CHAR(32),
 	dropoff CHAR(32),
-	member CHAR(320),
+	member  CHAR(320),
 	FOREIGN KEY (pickup)  REFERENCES Locations,
 	FOREIGN KEY (dropoff) REFERENCES Locations,
-	FOREIGN KEY (member) REFERENCES Members
+	FOREIGN KEY (member)  REFERENCES Members
 );
 
 CREATE TABLE Enroute(
