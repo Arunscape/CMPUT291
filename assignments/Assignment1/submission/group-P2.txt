@@ -5,12 +5,12 @@ CREATE TABLE Bookings(
 	isFor   CHAR(16)  NOT NULL,
 	dropOff CHAR(16),
 	pickup  CHAR(16),
-	reserve CHAR(320) NOT NULL,
+	reservedFor CHAR(320) NOT NULL,
 	PRIMARY KEY (bno),
 	FOREIGN KEY (isFor)   REFERENCES Rides,
 	FOREIGN KEY (dropOff) REFERENCES Locations,
 	FOREIGN KEY (pickup)  REFERENCES Locations,
-	FOREIGN KEY (reserve) REFERENCES Members
+	FOREIGN KEY (reservedFor) REFERENCES Members
 );
 
 CREATE TABLE Members(
@@ -27,11 +27,11 @@ CREATE TABLE Reviews(
 	rscore   INTEGER,
 	reviewer CHAR(320) NOT NULL,
 	reviewee CHAR(320) NOT NULL,
-	assoc    CHAR(16),
+	for    CHAR(16),
 	PRIMARY KEY (rid),
 	FOREIGN KEY (reviewer) REFERENCES Members,
 	FOREIGN KEY (reviewee) REFERENCES Members,
-	FOREIGN KEY (assoc)    REFERENCES Rides
+	FOREIGN KEY (for)    REFERENCES Rides
 );
 
 CREATE TABLE Rides(
@@ -43,17 +43,18 @@ CREATE TABLE Rides(
 	src     CHAR(32)  NOT NULL,
 	dst     CHAR(32)  NOT NULL,
 	offer   CHAR(320) NOT NULL,
-	assoc   CHAR(16),
+	carUsed   CHAR(16),
 	PRIMARY KEY (rno),
 	FOREIGN KEY (src)   REFERENCES Locations,
 	FOREIGN KEY (dst)   REFERENCES Locations,
 	FOREIGN KEY (offer) REFERENCES Drivers,
-	FOREIGN KEY (assoc) REFERENCES Cars
+	FOREIGN KEY (carUsed) REFERENCES Cars
 );
 
 CREATE TABLE Drivers(
 	email CHAR(320) NOT NULL,
 	licNo CHAR(16),
+	PRIMARY KEY (email),
 	FOREIGN KEY (email) REFERENCES Members
 );
 
@@ -64,9 +65,9 @@ CREATE TABLE Cars(
 	year     INTEGER,
 	seats    INTEGER,
 	gdate    DATE,
-	register CHAR(320),
+	registeredTo CHAR(320),
 	PRIMARY KEY (cno),
-	FOREIGN KEY (register) REFERENCES Drivers
+	FOREIGN KEY (registeredTo) REFERENCES Drivers
 ):
 
 CREATE TABLE Locations(
@@ -82,8 +83,10 @@ CREATE TABLE Requests(
 	qdate   DATE,
 	pickup  CHAR(32),
 	dropoff CHAR(32),
+	member CHAR(320),
 	FOREIGN KEY (pickup)  REFERENCES Locations,
-	FOREIGN KEY (dropoff) REFERENCES Locations
+	FOREIGN KEY (dropoff) REFERENCES Locations,
+	FOREIGN KEY (member) REFERENCES Members
 );
 
 CREATE TABLE Enroute(
