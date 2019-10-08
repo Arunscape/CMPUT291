@@ -1,0 +1,11 @@
+100 marks in total broken down to 10 marks per query
+Deductions for each query are applied as follows:
+  - does not run (-10)
+  - Q1-3 only: uses aggregation functions, grouping or nesting (-10)
+  - uses temporary tables or views (-10)
+  - produces incorrect result in our testing (-5)
+  - query's approach not close to a correct solution (-2)
+  - uses unnecessary tables or is overly complicated (-1)
+  - unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+  - not sufficiently tested (-1)
+  - Q10: does not use the view from Q9 (-5)
