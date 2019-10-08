@@ -1,3 +1,4 @@
+.print Question 5 - awoosare
 SELECT DISTINCT d.fname, d.lname
 FROM demeritNotices as d
 WHERE d.ddate BETWEEN DATE('now', '-2 year') AND DATE('now')

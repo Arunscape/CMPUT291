@@ -1,3 +1,4 @@
+.print Question 2 - awoosare
 SELECT DISTINCT b2.fname, b2.lname
 FROM births b1, births b2
 WHERE (b1.fname='Michael' AND b1.lname='Fox')

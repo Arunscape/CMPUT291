@@ -1,3 +1,4 @@
+.print Question 4 - awoosare
 SELECT births.fname, births.lname
 FROM births
 JOIN persons ON persons.fname = births.fname AND persons.lname = births.lname

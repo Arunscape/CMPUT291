@@ -1,3 +1,4 @@
+.print Question 1 - awoosare
 SELECT persons.fname, persons.lname, persons.phone
 FROM persons, registrations, vehicles
 WHERE persons.fname=registrations.fname
