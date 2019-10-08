@@ -5,4 +5,4 @@ AND persons.lname=registrations.lname
 AND registrations.vin=vehicles.vin
 AND vehicles.make='Chevrolet'
 AND vehicles.model='Camaro'
-AND vehicles.year=1969
+AND vehicles.year=1969;
