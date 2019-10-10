@@ -9,3 +9,4 @@ JOIN marriages ON
 		AND marriages.p1_fname='Michael' AND marriages.p1_lname='Fox')
 ORDER BY marriages.regdate DESC
 LIMIT 1
+;

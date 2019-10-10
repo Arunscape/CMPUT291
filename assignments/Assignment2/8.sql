@@ -1,6 +1,8 @@
 .print Question 8 - awoosare
+-- For each year of a car, find the most frequent make and the most frequent car color. In case of ties, list all those ties.
+-- SELECT v.year, v.make, v.color, COUNT(v.make) AS num_make
+-- FROM vehicles v
 
-SELECT v.year, v.make, v.color
-FROM vehicles v
-
-GROUP BY v.make, v.color
+SELECT * from vehicles
+-- GROUP BY v.year
+;

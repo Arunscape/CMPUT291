@@ -13,6 +13,7 @@ AND persons.bdate = (
 	WHERE b.f_fname = 'Michael' AND b.f_lname = 'Fox'
 	ORDER BY p.bdate ASC
 	LIMIT 1
-);
+)
+;
 	
 

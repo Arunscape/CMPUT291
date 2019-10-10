@@ -5,4 +5,5 @@ JOIN registrations ON persons.fname=registrations.fname AND persons.lname=regist
 JOIN vehicles ON registrations.vin=vehicles.vin
 AND vehicles.make='Chevrolet'
 AND vehicles.model='Camaro'
-AND vehicles.year=1969;
+AND vehicles.year=1969
+;

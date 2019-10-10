@@ -11,3 +11,4 @@ LEFT OUTER JOIN registrations r ON r.vin=v.vin
 LEFT OUTER JOIN tickets t ON t.regno=r.regno
 WHERE r.expiry > DATE('now', '+1 month')
 GROUP BY v.color
+;
