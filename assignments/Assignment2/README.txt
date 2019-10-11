@@ -3,4 +3,5 @@ readme:
 	ccid: awoosare
 	lab_section: ED02
 	collaboration:
-		- I declare that I did not collaborate with anyone in this assignment
+		- I used Ryan Kang's data from the eclass forum
+		- Compare test output with arostron

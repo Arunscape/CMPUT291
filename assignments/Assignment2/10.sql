@@ -9,6 +9,7 @@ JOIN registrations r ON r.fname=pd.fname AND r.lname=pd.lname
 JOIN vehicles v ON v.vin=r.vin
 -- USING(vin)
 JOIN tickets t ON t.regno=r.regno 
+AND t.vdate >= DATE('now', '-1 year')
 -- USING(regno)
 WHERE pd.ticketsRcvd >=3 
 AND violation LIKE '%red light%'
