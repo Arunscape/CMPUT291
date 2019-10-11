@@ -7,3 +7,4 @@ AND (SELECT SUM(demeritNotices.points)
 	GROUP BY fname, lname)
 >=15
 ;
+

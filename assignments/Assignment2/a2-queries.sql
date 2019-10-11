@@ -8,6 +8,7 @@ AND vehicles.make='Chevrolet'
 AND vehicles.model='Camaro'
 AND vehicles.year=1969
 ;
+
 .print Question 2 - awoosare
 SELECT DISTINCT b2.fname, b2.lname
 FROM births b1, births b2
@@ -18,6 +19,7 @@ AND (
 	OR
 	(b1.m_fname = b2.m_fname AND b1.m_lname = b2.m_lname)
 );
+
 .print Question 3 - awoosare
 SELECT DISTINCT b2.fname, b2.lname
 FROM births b1, births b2, births b3, births b4
@@ -35,6 +37,7 @@ AND (
 ) -- b4 is someone who is not Michael's mother or father but a parent of b2
 AND (b3.f_fname = b4.f_fname AND b3.f_lname = b4.f_lname)
 ;
+
 .print Question 4 - awoosare
 SELECT births.fname, births.lname
 FROM births
@@ -52,6 +55,7 @@ AND persons.bdate = (
 	LIMIT 1
 )
 ;
+
 	
 
 .print Question 5 - awoosare
@@ -63,6 +67,7 @@ AND (SELECT SUM(demeritNotices.points)
 	GROUP BY fname, lname)
 >=15
 ;
+
 .print Question 6 - awoosare
 SELECT persons.fname, persons.lname
 FROM persons
@@ -74,7 +79,8 @@ JOIN marriages ON
 		AND marriages.p1_fname='Michael' AND marriages.p1_lname='Fox')
 ORDER BY marriages.regdate DESC
 LIMIT 1
-;.print Question 7 - awoosare
+;
+.print Question 7 - awoosare
 -- For each color of a car with a registration that does not expire at least for another month, find the average number of tickets issued per registration, the average amount of fine given, and the maximum amount of fine given. Include colors with no tickets in the output with zero counts (if applicable) or null values. Hint: you may find outer join useful.
 SELECT DISTINCT v.color,
 --COUNT(t.tno) AS tickets_per_colour,
@@ -88,6 +94,7 @@ LEFT OUTER JOIN tickets t ON t.regno=r.regno
 WHERE r.expiry > DATE('now', '+1 month')
 GROUP BY v.color
 ;
+
 .print Question 8 - awoosare
 -- For each year of a car, find the most frequent make and the most frequent car color. In case of ties, list all those ties.
 SELECT year, make, color
@@ -123,29 +130,42 @@ FROM (
     )
 -- FINALLY, select the year, make, color from this clusterf***
 ;
+
 .print Question 9 - awoosare
 -- Create a view called personDetails with columns fname, lname, bdate, bplace, carsowned, and ticketsRcvd. 
 -- The view includes for each person, fname, lname, bdate, bplace, the number of different cars registered under the person name in the past year, and the number of different tickets given to those registered cars within the past year. 
 -- Include people who have no cars registered under their names or no tickets with zero values.
--- CREATE VIEW personDetails AS
-       -- DISTINCT gets rid of michael fox duplicate
-SELECT DISTINCT fname, lname, bdate, bplace, carsowned, ticketsRcvd --, carsowned, ticketsRcvd
-FROM persons
-LEFT OUTER JOIN births USING(fname, lname)
-LEFT OUTER JOIN (SELECT fname, lname, IFNULL(COUNT(*), 0) AS carsowned
-                    FROM registrations
-                    WHERE regdate >= DATE('now', '-1 year')
-                    GROUP BY fname, lname) regs 
-USING(fname, lname)
-LEFT OUTER JOIN (SELECT fname, lname, IFNULL(COUNT(DISTINCT tno), 0) AS ticketsRcvd
-                    FROM registrations
-                    LEFT OUTER JOIN tickets USING(regno)
-                    WHERE regdate >= DATE('now', '-1 year')
-                    GROUP BY fname, lname
-                    ) ticks
-USING(fname, lname)
+
+-- DROP VIEW IF EXISTS personDetails;
+
+CREATE VIEW personDetails (fname, lname, bdate, bplace, carsowned, ticketsRcvd) AS
+SELECT p.fname, p.lname, p.bdate, p.bplace, COUNT(DISTINCT r.regno) AS carsowned, COUNT(DISTINCT t.tno) AS ticketsRcvd
+FROM persons p
+LEFT OUTER JOIN registrations r 
+    ON 
+    r.fname=p.fname AND
+    r.lname=p.lname AND
+    r.regdate >= DATE('now', '-1 year')
+LEFT OUTER JOIN tickets t
+USING(regno)
+LEFT OUTER JOIN vehicles v
+USING(vin)
+GROUP BY p.fname, p.lname
 ;
+
+-- SELECT * FROM personDetails;
 .print Question 10 - awoosare
 -- Using the view created in Q9, for every person who has received at least 3 different tickets within the past year and one of those tickets involves a 'red light' violation 
 -- (i.e. 'red light' appears in the violation text, e.g. 'red light crossing', 'crossing red light at 114 St and 87 Ave'), list the name of the person and the make and the model of the car for which the red violation ticket is given.
+SELECT pd.fname, pd.lname, v.make, v.model
+FROM
+personDetails pd
+JOIN registrations r ON r.fname=pd.fname AND r.lname=pd.lname
+JOIN vehicles v ON v.vin=r.vin
+JOIN tickets t ON t.regno=r.regno 
+AND t.vdate >= DATE('now', '-1 year')
+WHERE pd.ticketsRcvd >=3 
+AND violation LIKE '%red light%'
 ;
+
+-- SELECT * FROM personDetails;

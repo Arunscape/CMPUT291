@@ -8,3 +8,4 @@ AND (
 	OR
 	(b1.m_fname = b2.m_fname AND b1.m_lname = b2.m_lname)
 );
+

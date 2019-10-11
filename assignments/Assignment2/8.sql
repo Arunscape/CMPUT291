@@ -33,3 +33,4 @@ FROM (
     )
 -- FINALLY, select the year, make, color from this clusterf***
 ;
+

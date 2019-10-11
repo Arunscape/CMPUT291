@@ -15,3 +15,4 @@ AND (
 ) -- b4 is someone who is not Michael's mother or father but a parent of b2
 AND (b3.f_fname = b4.f_fname AND b3.f_lname = b4.f_lname)
 ;
+
