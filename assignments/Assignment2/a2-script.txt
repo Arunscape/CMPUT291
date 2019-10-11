@@ -1,43 +1,138 @@
-
---Question 1
+.print Question 1 - awoosare
+Question 1 - awoosare
+SELECT persons.fname, persons.lname, persons.phone
+FROM persons
+JOIN registrations ON persons.fname=registrations.fname AND persons.lname=registrations.lname
+JOIN vehicles ON registrations.vin=vehicles.vin
+AND vehicles.make='Chevrolet'
+AND vehicles.model='Camaro'
+AND vehicles.year=1969
+;
 Lillian|Bounds|213-555-5556
 Davood|Rafiei|780-111-2222
-
-
---Question 2
+.print Question 2 - awoosare
+Question 2 - awoosare
+SELECT DISTINCT b2.fname, b2.lname
+FROM births b1, births b2
+WHERE (b1.fname='Michael' AND b1.lname='Fox')
+AND NOT (b2.fname='Michael' AND b2.lname='Fox')
+AND (
+	(b1.f_fname = b2.f_fname AND b1.f_lname = b2.f_lname) 
+	OR
+	(b1.m_fname = b2.m_fname AND b1.m_lname = b2.m_lname)
+);
 Q2|BothSameParent
-Q2|OnlyFather
 Q2|OnlyMother
-
-
---Question 3
+Q2|OnlyFather
+.print Question 3 - awoosare
+Question 3 - awoosare
+SELECT DISTINCT b2.fname, b2.lname
+FROM births b1, births b2, births b3, births b4
+WHERE (b1.fname = 'Michael' AND b1.lname = 'Fox') -- Michael Fox
+AND NOT (b2.fname='Michael' AND b2.lname='Fox') -- has same grandfather
+AND (
+	(b3.fname = b1.f_fname AND b3.lname = b1.f_lname) 
+	OR
+	(b3.fname = b1.m_fname AND b3.lname = b1.m_lname)
+) -- b3 is either Michael's father or mother
+AND (
+	(b4.fname = b2.f_fname AND b4.lname = b2.f_lname)
+	OR
+	(b4.fname = b2.m_fname AND b4.lname = b2.m_lname)
+) -- b4 is someone who is not Michael's mother or father but a parent of b2
+AND (b3.f_fname = b4.f_fname AND b3.f_lname = b4.f_lname)
+;
 Q2|BothSameParent
-Q2|OnlyFather
 Q2|OnlyMother
-Q3|FGDaughterD
-Q3|FGSonSon
+Q2|OnlyFather
 Q3|MGDaughterD
 Q3|MGSonSon
-
-
---Question 4
+Q3|FGDaughterD
+Q3|FGSonSon
+.print Question 4 - awoosare
+Question 4 - awoosare
+SELECT births.fname, births.lname
+FROM births
+JOIN persons ON persons.fname = births.fname AND persons.lname = births.lname
+WHERE (births.f_fname = 'Michael' AND births.f_lname = 'Fox'
+OR births.m_fname = 'Michael' AND births.m_lname = 'Fox')
+-- It's 2019, the mother might be named Michael Fox
+AND persons.bdate = (
+	SELECT p.bdate
+	FROM persons as p
+	JOIN births as b 
+	ON p.fname = b.fname AND p.lname = b.lname
+	WHERE b.f_fname = 'Michael' AND b.f_lname = 'Fox'
+	ORDER BY p.bdate ASC
+	LIMIT 1
+)
+;
 Q4|MFOld
 Q4|MFOld2
+	
 
-
---Question 5
+.print Question 5 - awoosare
+Question 5 - awoosare
+SELECT DISTINCT fname, lname
+FROM demeritNotices
+WHERE ddate BETWEEN DATE('now', '-2 year') AND DATE('now')
+AND (SELECT SUM(demeritNotices.points)
+	FROM demeritNotices
+	GROUP BY fname, lname)
+>=15
+;
 Q5|Multi20
 Q5|Single20
-
---Question 6
+.print Question 6 - awoosare
+Question 6 - awoosare
+SELECT persons.fname, persons.lname
+FROM persons
+JOIN marriages ON 
+	(persons.fname=marriages.p1_fname AND persons.lname=marriages.p1_lname
+		AND marriages.p2_fname='Michael' AND marriages.p2_lname='Fox')
+	OR
+	(persons.fname=marriages.p2_fname AND persons.lname=marriages.p2_lname
+		AND marriages.p1_fname='Michael' AND marriages.p1_lname='Fox')
+ORDER BY marriages.regdate DESC
+LIMIT 1
+;
 Q6|MarNew
-
---Question 7
-black|0.5|30.0|30
-red|2.0|26.25|60
-white|1.28571428571429|11.2222222222222|15
-
---Question 8
+.print Question 8 - awoosare
+Question 8 - awoosare
+-- For each year of a car, find the most frequent make and the most frequent car color. In case of ties, list all those ties.
+SELECT year, make, color
+FROM (
+        (SELECT v.year, v.make
+            FROM vehicles v
+            GROUP BY v.year, v.make
+            -- for each year, get the make(s) which have the max count for that year
+            HAVING COUNT(*) = (SELECT MAX(make_count)
+                                FROM
+                                    (SELECT year, make, COUNT(*) as make_count
+                                        FROM vehicles vee
+                                    GROUP BY year, make)
+                                WHERE year = v.year) -- for each year, get the count for each make
+        ) make_table -- now we have the most popular make for each year including ties
+        -- do the same thing again for colour and JOIN it on year
+         LEFT OUTER JOIN
+            (SELECT veh.year, veh.color
+                FROM vehicles veh
+                GROUP BY veh.year, veh.color
+                HAVING COUNT(*) = (SELECT MAX(colour_count)
+                                    FROM
+                                        (SELECT year, color, COUNT(*) as colour_count
+                                            FROM vehicles veicicles
+                                            GROUP BY year, color) 
+                                            WHERE year = veh.year)
+            ) colour_table
+        USING(year) -- same column name
+        -- UNION ALL
+        -- SELECT * FROM colour_table
+        -- LEFT OUTER JOIN make_table
+        -- USING(year)
+    )
+-- FINALLY, select the year, make, color from this clusterf***
+;
 1964|Mercedes|black
 1969|Chevrolet|red
 1969|Chevrolet|white
@@ -47,47 +142,68 @@ white|1.28571428571429|11.2222222222222|15
 2014|Audi|white
 2015|Audi|white
 2016|Audi|white
-
---Question 9
-Michael|Fox|1961-06-09|Edmonton, AB|0|0
-Walt|Disney|1901-12-05|Chicago, US|0|0
-Lillian|Bounds|1899-02-15|Spalding, Idaho|0|1
-John|Truyens|1907-05-15|Flanders, Belgium|0|0
-Mickey|Mouse|1928-01-05|Disneyland, FL|0|0
-Minnie|Mouse|1928-02-04|Anaheim, US|0|3
-Amalia|Kane|1928-07-03|Marvin Plains, OK|0|1
-Horace|Combs|1965-10-02|Anaheim, US|0|0
-Wendy|Ballard|1953-05-15|Halifax, NS|0|0
-Stacey|Long|1953-05-15|Halifax, NS|0|0
+.print Question 9 - awoosare
+Question 9 - awoosare
+-- Create a view called personDetails with columns fname, lname, bdate, bplace, carsowned, and ticketsRcvd. 
+-- The view includes for each person, fname, lname, bdate, bplace, the number of different cars registered under the person name in the past year, and the number of different tickets given to those registered cars within the past year. 
+-- Include people who have no cars registered under their names or no tickets with zero values.
+-- CREATE VIEW personDetails AS
+       -- DISTINCT gets rid of michael fox duplicate
+SELECT DISTINCT fname, lname, bdate, bplace, carsowned, ticketsRcvd --, carsowned, ticketsRcvd
+FROM persons
+LEFT OUTER JOIN births USING(fname, lname)
+LEFT OUTER JOIN (SELECT fname, lname, IFNULL(COUNT(*), 0) AS carsowned
+                    FROM registrations
+                    WHERE regdate >= DATE('now', '-1 year')
+                    GROUP BY fname, lname) regs 
+USING(fname, lname)
+LEFT OUTER JOIN (SELECT fname, lname, IFNULL(COUNT(DISTINCT tno), 0) AS ticketsRcvd
+                    FROM registrations
+                    LEFT OUTER JOIN tickets USING(regno)
+                    WHERE regdate >= DATE('now', '-1 year')
+                    GROUP BY fname, lname
+                    ) ticks
+USING(fname, lname)
+;
+Amalia|Kane|1928-07-03|Marvin Plains, OK||
+Davood|Rafiei|1998-10-08|Iran|2|4
+Horace|Combs|1965-10-02|Anaheim, US||
+John|Truyens|1907-05-15|Flanders, Belgium||
+Lillian|Bounds|1899-02-15|Spalding, Idaho||
+MF|FGrandFather|1944-12-25|St John, NB||
+MF|MGrandFather|1944-12-25|St John, NB||
 Mia|Warner|1944-12-25|St John, NB|2|5
-Davood|Rafiei|1998-10-05|Iran|2|4
-Throw|Away|1944-12-25|St John, NB|0|0
-Q2|BothSameParent|1944-12-25|St John, NB|0|0
-Q2|OnlyMother|1944-12-25|St John, NB|0|0
-Q2|OnlyFather|1944-12-25|St John, NB|0|0
-Q2|NULLFather|1944-12-25|St John, NB|0|0
-MF|MGrandFather|1944-12-25|St John, NB|0|0
-MF|FGrandFather|1944-12-25|St John, NB|0|0
-Q3|MGDaughter|1944-12-25|St John, NB|0|0
-Q3|MGSon|1944-12-25|St John, NB|0|0
-Q3|FGDaughter|1944-12-25|St John, NB|0|0
-Q3|FGSon|1944-12-25|St John, NB|0|0
-Q3|MGDaughterD|1944-12-25|St John, NB|0|0
-Q3|MGSonSon|1944-12-25|St John, NB|0|0
-Q3|FGDaughterD|1944-12-25|St John, NB|0|0
-Q3|FGSonSon|1944-12-25|St John, NB|0|0
-Q4|MFYoung|2015-07-22|St John, NB|0|0
-Q4|MFMid|2001-08-15|St John, NB|0|0
-Q4|MFOld|1989-12-25|St John, NB|0|0
-Q4|MFOld2|1989-12-25|St John, NB|0|0
-Q5|OutOfDate|1989-12-25|St John, NB|0|0
-Q5|Single20|1989-12-25|St John, NB|0|0
-Q5|Multi20|1989-12-25|St John, NB|0|0
-Q6|MarOld|1989-12-25|St John, NB|0|0
-Q6|MarNew|1989-12-25|St John, NB|0|0
-Q6|MarMid|1989-12-25|St John, NB|0|0
+Michael|Fox|1961-06-09|Edmonton, AB||
+Mickey|Mouse|1928-01-05|Disneyland, FL||
+Minnie|Mouse|1928-02-04|Anaheim, US||
+Q2|BothSameParent|1944-12-25|St John, NB||
+Q2|NULLFather|1944-12-25|St John, NB||
+Q2|OnlyFather|1944-12-25|St John, NB||
+Q2|OnlyMother|1944-12-25|St John, NB||
+Q3|FGDaughter|1944-12-25|St John, NB||
+Q3|FGDaughterD|1944-12-25|St John, NB||
+Q3|FGSon|1944-12-25|St John, NB||
+Q3|FGSonSon|1944-12-25|St John, NB||
+Q3|MGDaughter|1944-12-25|St John, NB||
+Q3|MGDaughterD|1944-12-25|St John, NB||
+Q3|MGSon|1944-12-25|St John, NB||
+Q3|MGSonSon|1944-12-25|St John, NB||
+Q4|MFMid|2001-08-15|St John, NB||
+Q4|MFOld|1989-12-25|St John, NB||
+Q4|MFOld2|1989-12-25|St John, NB||
+Q4|MFYoung|2015-07-22|St John, NB||
+Q5|Multi20|1989-12-25|St John, NB||
+Q5|OutOfDate|1989-12-25|St John, NB||
+Q5|Single20|1989-12-25|St John, NB||
+Q6|MarMid|1989-12-25|St John, NB||
+Q6|MarNew|1989-12-25|St John, NB||
+Q6|MarOld|1989-12-25|St John, NB||
 Q9|CarnoTick|1989-12-25|St John, NB|1|0
-
---Question 10
-Davood|Rafiei|Audi|A4
-Mia|Warner|Audi|A4
+Stacey|Long|1953-05-15|Halifax, NS||
+Throw|Away|1944-12-25|St John, NB||
+Walt|Disney|1901-12-05|Chicago, US||
+Wendy|Ballard|1953-05-15|Halifax, NS||
+.print Question 10 - awoosare
+Question 10 - awoosare
+-- Using the view created in Q9, for every person who has received at least 3 different tickets within the past year and one of those tickets involves a 'red light' violation 
+-- (i.e. 'red light' appears in the violation text, e.g. 'red light crossing', 'crossing red light at 114 St and 87 Ave'), list the name of the person and the make and the model of the car for which the red violation ticket is given.
