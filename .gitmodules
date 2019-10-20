@@ -1,0 +1,3 @@
+[submodule "assignments/Project1"]
+	path = assignments/Project1
+	url = git@github.com:bojotamara/registry-app.git

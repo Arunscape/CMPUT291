@@ -1,0 +1,252 @@
+Student ccid: awoosare 	 Name: Arun Woosaree
+
+
+		       CMPUT 291 - Fall 2019- Marking Scheme (Assignment #2)
+		       =================================================
+
+QUERIES
+-------
+   Query 1:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses aggregation functions, grouping or nesting (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or is overly complicated (-1)
+
+     -1 Unnecessarily uses DISTINCT or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+	
+ 
+9/10 Total
+
+
+   Query 2:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses aggregation functions, grouping or nesting (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or is overly complicated (-1)
+
+     -1 Unnecessarily uses DISTINCT or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+9/10 Total
+
+
+   Query 3:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses aggregation functions, grouping or nesting (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:10/10 Total
+
+
+   Query 4:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+10/10 Total
+
+
+   Query 5:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     -5 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     -1 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     -1 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+3/10 Total
+
+
+   Query 6:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     -1 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+9/10 Total
+
+
+   Query 7:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+10/10 Total
+
+
+   Query 8:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Uses temporary tables or views (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+10/10 Total
+
+
+   Query 9:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Null values in the result instead of zero (-1)
+
+     0 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+        - does not include all non-aggregated columns in group by clause. [-1]
+        - no date constraints on tickets. [-1]
+
+
+8/10 Total
+
+
+   Query 10:
+     Deductions (max 10):
+
+     0 Does not run (-10)
+
+     0 Does not use the view from Q9 (-5)
+
+     0 Incorrect result (-5)
+
+     0 Query's approach not close to a correct solution (-2)
+
+     0 Uses unnecessary tables or nesting or is overly complicated (-1)
+
+     0 Unnecessarily uses DISTINCT/GROUP BY or results in duplicates (-1)
+
+     0 Not sufficiently tested (-1)
+
+     Additional Comments:
+
+
+10/10 Total
+
+
+Deductions:
+  
+     0 README.txt is not submitted or is missing content  (-5)
+
+     0 Late penalty (if applicable)
+
+
+88/100 TOTAL

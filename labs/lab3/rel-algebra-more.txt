@@ -1,0 +1,23 @@
+More Exercises on Relational Algebra and SQL:
+
+Consider the the following relation schemas as we saw before. Write each query in relational algebra and SQL.
+
+product(maker,model,type);
+pc(model,speed,ram,HD,price);
+laptop(model,speed,ram,HD,price);
+printer(model,color,type,price);
+
+- Which makers do have more than one model of printers?
+
+- Which makers are producing PC of model 1003?
+
+- Which makers do have products that are priced over $1000?
+
+- List the type and the model of products with a speed more than 200MHz.
+ 
+- List printer models such that their makers don't make any other type of products.
+
+- Find PC models that are manufactured by the maker of a laptop model "2004".
+
+- Find laptop models that are priced higher than all PCs.
+
