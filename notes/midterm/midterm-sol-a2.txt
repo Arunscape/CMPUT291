@@ -1,0 +1,45 @@
+Q1. 
+ a)F, b)T, c)F, d)T, e)F
+
+Q2. 
+ a) see the ER model.
+ b) Here are the tables:
+ customers(cname, address), PK:(cname)
+ policies(pno, expiry, buyer), PK:(pno), FK:(buyer) ref. customers
+ cars(vin, year), PK:(vin)
+ accidents(adate, loc, vin), PK:(adate, vin), FK:(vin) ref. cars
+ covers(vin, pno), PK:(vin, pno), FK:(vin) ref. cars, FK:(pno) ref. policies
+ owns(cname, vin), PK:(cname, vin), FK:(cname) ref. customers, FK:(vin) ref. cars
+
+Q3.
+ a) select cname, party
+    from voters v, candidates c
+    where v.vname = 'Joe Smith' and v.riding=c.riding;
+ b) select party, count(*)
+    from votes v, candidates c, voters t
+    where v.cid=c.cid and v.vid=t.vid and age between 18 and 24
+    group by party;
+ c) select party
+    from candidates c
+    group by party
+    having count(*) < 20;
+ d) -- sql standard syntax
+    select party
+    from candidates
+    group by party
+    having count(*) >= all (select count(*) from candidates group by party);
+    -- sqlite syntax
+    select party
+    from candidates
+    group by party
+    having count(*) >= (select max(cnt)
+                        from (select count(*) as cnt
+                        from candidates group by party));
+
+Q4.
+  PROJECT_party,riding candidates / PROJECT_riding SELECT_party='NDP' ridings
+
+Q5.
+ a) 0, NULL
+ b) Edmonton Strathcona, 2
+    NULL, 0

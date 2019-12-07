@@ -1,0 +1,38 @@
+Q1. a)T, b)T, c)F, d)F, e)F
+
+Q2. 
+ a) see the ER model.
+ b) Here are the tables:
+ teams(tname, city), PK:(tname)
+ players(pno, tname, pname), PK:(pno,tname), FK:(tname) ref. teams
+ matches(mid, mdate, home, visitor), PK:(mid), FK:(home) ref. teams, FK:(visitor) ref. teams
+ plays(pno, tname, mid, goals, points), PK:(pno, tname, mid), FK:(pno, tname) ref. players, FK:(mid) ref. matches
+
+Q3.
+ a) select cid, cname
+    from ridings r, candidates c
+    where r.riding=c.riding and party='Green' and r.city='Edmonton';
+ b) select v.cid, count(*)
+    from votes v, candidates c, ridings r
+    where v.cid=c.cid and c.riding=r.riding and city='Edmonton'
+    group by v.cid;
+ c) select city
+    from ridings
+    group by city
+    having count(*) > 5;
+ d) select c.cid
+    from candidates c, votes v
+    where c.cid=v.cid
+    group by c.cid, c.riding
+    having 0.5*count(*) > (select count(*) from candidates c2, votes v2
+                           where c2.riding=c.riding and c2.cid=v2.cid);
+
+Q4.
+  PROJECT_party candidates - (PROJECT_party,riding candidates / PROJECT_riding ridings)
+
+Q5.
+ a) c1,1,1
+    c2,2,2
+    c3,1,0
+ b) c1
+    c2
